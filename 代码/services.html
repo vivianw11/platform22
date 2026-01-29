@@ -1,0 +1,1789 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务 - 链享银龄共享平台（苏州）</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2A6FDB;
+            --secondary-color: #4CAF50;
+            --accent-color: #FF6B35;
+            --light-blue: #E8F4FF;
+            --light-green: #F0F9F0;
+            --light-orange: #FFF5F0;
+            --text-dark: #333333;
+            --text-medium: #666666;
+            --text-light: #999999;
+            --border-color: #E0E0E0;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary-color), #4A90E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .location-tag {
+            background: #F0F7FF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--primary-color);
+            margin-left: 10px;
+            font-weight: 500;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        
+}
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(42, 111, 219, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #1E5FC4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(42, 111, 219, 0.3);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        /* 服务页面样式 */
+        .services-page {
+            padding: 40px 0;
+            background-color: #f9f9f9;
+            min-height: calc(100vh - 200px);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--text-medium);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .services-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .service-tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .service-tab:hover {
+            color: var(--primary-color);
+        }
+
+        .service-tab.active {
+            color: var(--primary-color);
+        }
+
+        .service-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 设备介绍 */
+        .device-categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-medium);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .device-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .device-image {
+            height: 180px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 50px;
+        }
+
+        .device-info {
+            padding: 20px;
+        }
+
+        .device-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .device-description {
+            color: var(--text-medium);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .device-specs {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .device-specs li {
+            padding: 5px 0;
+            color: var(--text-medium);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .device-specs i {
+            color: var(--secondary-color);
+            font-size: 12px;
+        }
+
+        .device-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* 使用情况 */
+        .usage-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .usage-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .usage-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .usage-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .usage-map {
+            height: 300px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            font-size: 18px;
+            position: relative;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 2;
+        }
+
+        .map-legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 2;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .high-usage { background: #FF6B6B; }
+        .medium-usage { background: #FFD93D; }
+        .low-usage { background: #6BCF7F; }
+
+        .usage-stats {
+            display: grid;
+            gap: 20px;
+        }
+
+        .stat-item-small {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-label-small {
+            font-size: 14px;
+            color: var(--text-medium);
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .popular-devices {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .popular-devices li {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .device-rank {
+            width: 25px;
+            height: 25px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        .device-name {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .device-usage {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        /* 服务咨询 */
+        .consultation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .consultation-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .consultation-form {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .consultation-form h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .consultation-chat {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            margin-right: auto;
+        }
+
+        .message.user {
+            margin-left: auto;
+        }
+
+        .message-content {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .message.bot .message-content {
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .message.user .message-content {
+            border-right: 3px solid var(--secondary-color);
+            background: #f0f9f0;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        /* 预约系统 */
+        .reservation-steps {
+            margin-top: 30px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .step-indicator {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .step-indicator::before {
+                display: none;
+            }
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active .step-number {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .step-label {
+            font-size: 14px;
+            color: var(--text-medium);
+        }
+
+        .step-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .step-panel {
+            display: none;
+        }
+
+        .step-panel.active {
+            display: block;
+        }
+
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .device-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .device-selection {
+                grid-template-columns: 1fr;
+            }
+            
+            .devices-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-container {
+                padding: 20px;
+            }
+        }
+
+        .device-option {
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .device-option:hover {
+            border-color: var(--primary-color);
+            background: #f0f7ff;
+        }
+
+        .device-option.selected {
+            border-color: var(--primary-color);
+            background: #f0f7ff;
+            box-shadow: 0 0 0 2px rgba(42, 111, 219, 0.1);
+        }
+
+        .device-option h4 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .device-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* 底部 */
+        footer {
+            background-color: #2C3E50;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #34495E;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495E;
+            color: #BDC3C7;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 450px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* 通知 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background-color: var(--secondary-color);
+        }
+
+        .notification.error {
+            background-color: #FF5252;
+        }
+
+        .notification.info {
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-link"></i>
+                    <span>链享银龄共享平台</span>
+                    <span class="location-tag">苏州</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                        <li><a href="services.html" class="active"><i class="fas fa-concierge-bell"></i> 服务</a></li>
+                        <li><a href="profile.html"><i class="fas fa-user-circle"></i> 个人中心</a></li>
+                        <li><a href="#contact"><i class="fas fa-phone-alt"></i> 联系</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> 登录
+                    </button>
+                    <button class="btn btn-primary" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> 注册
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 服务页面 -->
+    <section class="services-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">智能养老设备共享服务</h1>
+                <p class="page-subtitle">链享银龄共享平台提供一站式智能养老设备共享服务，涵盖设备介绍、使用情况、服务咨询和预约功能</p>
+            </div>
+            
+            <div class="services-container">
+                <div class="services-tabs">
+                    <button class="service-tab active" data-tab="devices">
+                        <i class="fas fa-robot"></i> 设备介绍
+                    </button>
+                    <button class="service-tab" data-tab="usage">
+                        <i class="fas fa-chart-line"></i> 使用情况
+                    </button>
+                    <button class="service-tab" data-tab="consultation">
+                        <i class="fas fa-headset"></i> 服务咨询
+                    </button>
+                    <button class="service-tab" data-tab="reservation">
+                        <i class="fas fa-calendar-check"></i> 设备预约
+                    </button>
+                </div>
+                
+                <!-- 设备介绍 -->
+                <div class="tab-content active" id="devicesTab">
+                    <h2>智能养老设备介绍</h2>
+                    <p>链享银龄平台提供多种智能养老设备，满足不同场景下的养老需求</p>
+                    
+                    <div class="device-categories">
+                        <button class="category-btn active" data-category="all">全部设备</button>
+                        <button class="category-btn" data-category="dailyCare">生活照料类</button>
+                        <button class="category-btn" data-category="safety">安全防护类</button>
+                        <button class="category-btn" data-category="rehabilitation">康复训练类</button>
+                        <button class="category-btn" data-category="medical">医疗保健类</button>
+                    </div>
+                    
+                    <div class="devices-grid" id="devicesGrid">
+                        <!-- 设备卡片将通过JS动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 使用情况 -->
+                <div class="tab-content" id="usageTab">
+                    <h2>设备使用情况</h2>
+                    <p>实时监控设备状态和使用情况，优化资源配置</p>
+                    
+                    <div class="usage-content">
+                        <div class="usage-card">
+                            <h3><i class="fas fa-map-marked-alt"></i> 设备分布热力图</h3>
+                            <div class="usage-map">
+                                <div class="map-overlay">
+                                    <h4>苏州地区设备分布</h4>
+                                    <p>实时显示设备位置与状态</p>
+                                </div>
+                                <div class="map-legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color high-usage"></span>
+                                        <span>高使用率 (>80%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color medium-usage"></span>
+                                        <span>中等使用率 (50-80%)</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color low-usage"></span>
+                                        <span>低使用率 (<50%)</span>
+                                    </div>
+                                </div>
+                                <div style="text-align:center;">
+                                    <i class="fas fa-map" style="font-size:60px; color:#4A90E2; margin-bottom:20px;"></i>
+                                    <p>苏州地区设备分布图</p>
+                                    <p style="font-size:12px; margin-top:10px;">实时更新中...</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="usage-card">
+                            <h3><i class="fas fa-chart-bar"></i> 实时数据统计</h3>
+                            <div class="usage-stats">
+                                <div class="stat-item-small">
+                                    <div class="stat-label-small">在线设备数量</div>
+                                    <div class="stat-value">876</div>
+                                </div>
+                                <div class="stat-item-small">
+                                    <div class="stat-label-small">当前使用率</div>
+                                    <div class="stat-value">78%</div>
+                                </div>
+                                <div class="stat-item-small">
+                                    <div class="stat-label-small">平均等待时间</div>
+                                    <div class="stat-value">2.3小时</div>
+                                </div>
+                                <div class="stat-item-small">
+                                    <div class="stat-label-small">今日预约数量</div>
+                                    <div class="stat-value">45</div>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-top:30px;"><i class="fas fa-fire"></i> 热门设备排行</h3>
+                            <ol class="popular-devices">
+                                <li>
+                                    <span class="device-rank">1</span>
+                                    <span class="device-name">智能护理床</span>
+                                    <span class="device-usage">92% 使用率</span>
+                                </li>
+                                <li>
+                                    <span class="device-rank">2</span>
+                                    <span class="device-name">跌倒监测仪</span>
+                                    <span class="device-usage">88% 使用率</span>
+                                </li>
+                                <li>
+                                    <span class="device-rank">3</span>
+                                    <span class="device-name">喂食机器人</span>
+                                    <span class="device-usage">85% 使用率</span>
+                                </li>
+                                <li>
+                                    <span class="device-rank">4</span>
+                                    <span class="device-name">智能床垫</span>
+                                    <span class="device-usage">82% 使用率</span>
+                                </li>
+                                <li>
+                                    <span class="device-rank">5</span>
+                                    <span class="device-name">康复训练机器人</span>
+                                    <span class="device-usage">78% 使用率</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 服务咨询 -->
+                <div class="tab-content" id="consultationTab">
+                    <h2>服务咨询</h2>
+                    <p>如有任何疑问或需要帮助，请随时联系我们</p>
+                    
+                    <div class="consultation-content">
+                        <div class="consultation-form">
+                            <h3><i class="fas fa-question-circle"></i> 提交咨询表单</h3>
+                            <form id="consultationForm">
+                                <div class="form-group">
+                                    <label for="consultationType">咨询类型</label>
+                                    <select id="consultationType" required>
+                                        <option value="">请选择咨询类型</option>
+                                        <option value="device">设备相关问题</option>
+                                        <option value="order">订单问题</option>
+                                        <option value="technical">技术问题</option>
+                                        <option value="policy">政策咨询</option>
+                                        <option value="other">其他</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="consultationDescription">问题描述</label>
+                                    <textarea id="consultationDescription" rows="5" placeholder="请详细描述您的问题..." required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactInfo">联系方式</label>
+                                    <input type="text" id="contactInfo" placeholder="手机号或邮箱" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">提交咨询</button>
+                            </form>
+                        </div>
+                        
+                        <div class="consultation-chat">
+                            <h3><i class="fas fa-robot"></i> 在线智能客服</h3>
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="message bot">
+                                    <div class="message-content">
+                                        您好！我是链享银龄智能客服。请问有什么可以帮助您的？
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-input">
+                                <input type="text" id="chatInput" placeholder="请输入您的问题...">
+                                <button class="btn btn-primary" id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                            <div style="margin-top:15px; font-size:12px; color:var(--text-light);">
+                                <p>工作时间：周一至周五 9:00-18:00</p>
+                                <p>紧急联系电话：400-123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 设备预约 -->
+                <div class="tab-content" id="reservationTab">
+                    <h2>设备预约</h2>
+                    <p>选择您需要的设备并完成预约流程</p>
+                    
+                    <div class="reservation-steps">
+                        <div class="step-indicator">
+                            <div class="step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-label">选择设备</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-label">填写信息</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-label">确认预约</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-number">4</div>
+                                <div class="step-label">完成支付</div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-content">
+                            <div class="step-panel active" data-step="1">
+                                <h3>选择设备类型</h3>
+                                <p>请选择您需要预约的设备类型：</p>
+                                
+                                <div class="device-selection">
+                                    <div class="device-option" data-device="智能护理床" data-price="200">
+                                        <h4><i class="fas fa-bed"></i> 智能护理床</h4>
+                                        <p>自动翻身、体位调节、体征监测</p>
+                                        <div class="device-price">¥200/天</div>
+                                    </div>
+                                    <div class="device-option" data-device="智能床垫" data-price="150">
+                                        <h4><i class="fas fa-procedures"></i> 智能床垫</h4>
+                                        <p>压力监测、离床报警、睡眠分析</p>
+                                        <div class="device-price">¥150/天</div>
+                                    </div>
+                                    <div class="device-option" data-device="喂食机器人" data-price="180">
+                                        <h4><i class="fas fa-utensils"></i> 喂食机器人</h4>
+                                        <p>自动喂食、食物温度控制</p>
+                                        <div class="device-price">¥180/天</div>
+                                    </div>
+                                    <div class="device-option" data-device="康复训练机器人" data-price="250">
+                                        <h4><i class="fas fa-walking"></i> 康复训练机器人</h4>
+                                        <p>步态训练、力量训练、平衡训练</p>
+                                        <div class="device-price">¥250/天</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="step-buttons">
+                                    <div></div>
+                                    <button class="btn btn-primary next-step" data-next="2">下一步</button>
+                                </div>
+                            </div>
+                            
+                            <div class="step-panel" data-step="2">
+                                <h3>填写预约信息</h3>
+                                <form id="reservationForm">
+                                    <div class="form-group">
+                                        <label>使用单位/个人</label>
+                                        <input type="text" id="userName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>联系电话</label>
+                                        <input type="tel" id="userPhone" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>使用地址</label>
+                                        <input type="text" id="userAddress" required placeholder="江苏省苏州市...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>使用开始时间</label>
+                                        <input type="date" id="startDate" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>使用时长</label>
+                                        <select id="duration" required>
+                                            <option value="">请选择使用时长</option>
+                                            <option value="7">7天</option>
+                                            <option value="15">15天</option>
+                                            <option value="30">30天</option>
+                                            <option value="90">90天</option>
+                                            <option value="180">180天</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>特殊需求说明</label>
+                                        <textarea id="specialNeeds" rows="3" placeholder="请说明特殊需求..."></textarea>
+                                    </div>
+                                </form>
+                                
+                                <div class="step-buttons">
+                                    <button class="btn btn-outline prev-step" data-prev="1">上一步</button>
+                                    <button class="btn btn-primary next-step" data-next="3">下一步</button>
+                                </div>
+                            </div>
+                            
+                            <div class="step-panel" data-step="3">
+                                <h3>确认预约信息</h3>
+                                <div id="reservationSummary" style="background:#f8f9fa; padding:20px; border-radius:8px; margin:20px 0;">
+                                    <!-- 预约信息将在此处显示 -->
+                                </div>
+                                
+                                <div class="form-group" style="margin:20px 0;">
+                                    <label>
+                                        <input type="checkbox" id="agreeTerms" required>
+                                        我已阅读并同意《设备租赁协议》和《安全责任条款》
+                                    </label>
+                                </div>
+                                
+                                <div class="step-buttons">
+                                    <button class="btn btn-outline prev-step" data-prev="2">上一步</button>
+                                    <button class="btn btn-primary next-step" data-next="4">确认预约</button>
+                                </div>
+                            </div>
+                            
+                            <div class="step-panel" data-step="4">
+                                <h3>完成支付</h3>
+                                <div style="text-align:center; padding:40px 0;">
+                                    <i class="fas fa-check-circle" style="font-size:60px; color:var(--secondary-color); margin-bottom:20px;"></i>
+                                    <h4>预约成功！</h4>
+                                    <p>您的设备预约已提交成功</p>
+                                    <p>订单号：<strong>ORD20240320001</strong></p>
+                                    <p style="margin-top:20px;">请扫描下方二维码完成支付：</p>
+                                    <div style="width:200px; height:200px; background:#f5f5f5; margin:20px auto; display:flex; align-items:center; justify-content:center;">
+                                        <span>支付二维码</span>
+                                    </div>
+                                    <p>支付完成后，我们将尽快安排设备配送</p>
+                                </div>
+                                
+                                <div class="step-buttons">
+                                    <button class="btn btn-outline" onclick="window.location.href='services.html'">返回服务</button>
+                                    <button class="btn btn-primary" onclick="window.location.href='profile.html'">查看订单</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> 链享银龄共享平台</h4>
+                    <p>苏州智能养老设备共享服务平台<br>让老年人共享改革发展成果</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="services.html">服务</a></li>
+                        <li><a href="profile.html">个人中心</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 400-123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contact@silverlink.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 江苏省苏州市工业园区</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>订阅更新</h4>
+                    <p>订阅我们的新闻通讯，获取最新养老科技资讯</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="请输入邮箱" style="padding:10px; border-radius:5px; border:1px solid #34495E; width:100%; margin-top:10px; background:#34495E; color:white;">
+                        <button class="btn btn-primary" style="width:100%; margin-top:10px;">订阅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 链享银龄共享平台. 江苏省苏州市. 基于协同治理理论与资源配置理论构建.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 登录模态框 -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>用户登录</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> 邮箱</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> 密码</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group" style="display:flex; justify-content:space-between; align-items:center;">
+                    <label style="margin-bottom:0;">
+                        <input type="checkbox" id="rememberMe"> 记住我
+                    </label>
+                    <a href="#" style="font-size:14px;">忘记密码?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 通知 -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // 设备数据
+        const devicesData = [
+            {
+                id: 1,
+                name: "智能护理床",
+                category: "dailyCare",
+                icon: "fas fa-bed",
+                description: "具备自动翻身、体位调节、体征监测等功能，适合失能老人使用",
+                specs: ["自动翻身功能", "体位智能调节", "生命体征监测", "离床报警系统"],
+                price: "200元/天"
+            },
+            {
+                id: 2,
+                name: "智能床垫",
+                category: "safety",
+                icon: "fas fa-procedures",
+                description: "实时监测老人睡眠状态和生命体征，预防跌倒和突发状况",
+                specs: ["压力分布监测", "心率呼吸监测", "离床时间记录", "异常报警功能"],
+                price: "150元/天"
+            },
+            {
+                id: 3,
+                name: "喂食机器人",
+                category: "dailyCare",
+                icon: "fas fa-utensils",
+                description: "自动识别老人进食需求，协助完成进食过程",
+                specs: ["食物温度控制", "进食速度调节", "防噎食设计", "易清洗材质"],
+                price: "180元/天"
+            },
+            {
+                id: 4,
+                name: "康复训练机器人",
+                category: "rehabilitation",
+                icon: "fas fa-walking",
+                description: "辅助老人进行康复训练，恢复肢体功能",
+                specs: ["步态训练模式", "力量训练功能", "平衡训练系统", "训练数据记录"],
+                price: "250元/天"
+            },
+            {
+                id: 5,
+                name: "药物管理机器人",
+                category: "medical",
+                icon: "fas fa-pills",
+                description: "自动分配药物，提醒老人按时服药",
+                specs: ["按时提醒功能", "药物自动分配", "用药记录管理", "家属远程监控"],
+                price: "120元/天"
+            },
+            {
+                id: 6,
+                name: "跌倒监测仪",
+                category: "safety",
+                icon: "fas fa-exclamation-triangle",
+                description: "实时监测老人活动状态，及时发现跌倒等异常情况",
+                specs: ["跌倒自动检测", "实时定位功能", "一键呼叫按钮", "长时间静止报警"],
+                price: "100元/天"
+            }
+        ];
+        
+        // 全局变量
+        let currentUser = null;
+        let selectedDevice = null;
+        
+        // DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 服务标签切换
+            const serviceTabs = document.querySelectorAll('.service-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            serviceTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // 更新标签状态
+                    serviceTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 显示对应内容
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if(content.id === tabId + 'Tab') {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // 设备分类筛选
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const devicesGrid = document.getElementById('devicesGrid');
+            
+            // 初始化设备列表
+            renderDevices('all');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // 更新按钮状态
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 渲染对应设备
+                    renderDevices(category);
+                });
+            });
+            
+            // 设备选项选择
+            const deviceOptions = document.querySelectorAll('.device-option');
+            deviceOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    deviceOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    selectedDevice = {
+                        name: this.getAttribute('data-device'),
+                        price: this.getAttribute('data-price')
+                    };
+                });
+            });
+            
+            // 预约步骤导航
+            const steps = document.querySelectorAll('.step');
+            const stepPanels = document.querySelectorAll('.step-panel');
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+            
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const nextStep = this.getAttribute('data-next');
+                    goToStep(nextStep);
+                });
+            });
+            
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevStep = this.getAttribute('data-prev');
+                    goToStep(prevStep);
+                });
+            });
+            
+            // 预约步骤3：显示摘要
+            document.querySelector('.next-step[data-next="3"]')?.addEventListener('click', function() {
+                updateReservationSummary();
+            });
+            
+            // 聊天功能
+            const chatInput = document.getElementById('chatInput');
+            const sendMessageBtn = document.getElementById('sendMessage');
+            
+            if(sendMessageBtn) {
+                sendMessageBtn.addEventListener('click', sendChatMessage);
+                chatInput?.addEventListener('keypress', function(e) {
+                    if(e.key === 'Enter') {
+                        sendChatMessage();
+                    }
+                });
+            }
+            
+            // 咨询表单提交
+            const consultationForm = document.getElementById('consultationForm');
+            if(consultationForm) {
+                consultationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('咨询已提交，我们将尽快回复您！', 'success');
+                    this.reset();
+                });
+            }
+            
+            // 预约表单提交
+            const reservationForm = document.getElementById('reservationForm');
+            if(reservationForm) {
+                reservationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    goToStep('3');
+                });
+            }
+            
+            // 登录功能
+            setupLoginFunctions();
+        });
+        
+        // 渲染设备列表
+        function renderDevices(category) {
+            const devicesGrid = document.getElementById('devicesGrid');
+            if(!devicesGrid) return;
+            
+            let filteredDevices = devicesData;
+            if(category !== 'all') {
+                filteredDevices = devicesData.filter(device => device.category === category);
+            }
+            
+            devicesGrid.innerHTML = filteredDevices.map(device => `
+                <div class="device-card">
+                    <div class="device-image">
+                        <i class="${device.icon}"></i>
+                    </div>
+                    <div class="device-info">
+                        <h3 class="device-title">${device.name}</h3>
+                        <p class="device-description">${device.description}</p>
+                        <ul class="device-specs">
+                            ${device.specs.map(spec => `<li><i class="fas fa-check"></i> ${spec}</li>`).join('')}
+                        </ul>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px;">
+                            <span style="color:var(--primary-color); font-weight:700; font-size:18px;">${device.price}</span>
+                            <div class="device-actions">
+                                <button class="btn btn-outline btn-small" onclick="showDeviceDetail(${device.id})">
+                                    <i class="fas fa-info-circle"></i> 详情
+                                </button>
+                                <button class="btn btn-primary btn-small" onclick="reserveDevice('${device.name}')">
+                                    <i class="fas fa-calendar-plus"></i> 预约
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 跳转到预约步骤
+        function goToStep(stepNumber) {
+            const steps = document.querySelectorAll('.step');
+            const stepPanels = document.querySelectorAll('.step-panel');
+            
+            // 更新步骤指示器
+            steps.forEach(step => {
+                if(parseInt(step.getAttribute('data-step')) <= stepNumber) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+            
+            // 显示对应面板
+            stepPanels.forEach(panel => {
+                panel.classList.remove('active');
+                if(panel.getAttribute('data-step') === stepNumber) {
+                    panel.classList.add('active');
+                }
+            });
+            
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // 更新预约摘要
+        function updateReservationSummary() {
+            const userName = document.getElementById('userName')?.value || '未填写';
+            const userPhone = document.getElementById('userPhone')?.value || '未填写';
+            const userAddress = document.getElementById('userAddress')?.value || '未填写';
+            const startDate = document.getElementById('startDate')?.value || '未选择';
+            const duration = document.getElementById('duration')?.value || '0';
+            
+            const summaryDiv = document.getElementById('reservationSummary');
+            if(summaryDiv) {
+                summaryDiv.innerHTML = `
+                    <h4>预约信息摘要</h4>
+                    <div style="margin-top:15px;">
+                        <p><strong>设备名称：</strong>${selectedDevice?.name || '未选择'}</p>
+                        <p><strong>使用单位/个人：</strong>${userName}</p>
+                        <p><strong>联系电话：</strong>${userPhone}</p>
+                        <p><strong>使用地址：</strong>${userAddress}</p>
+                        <p><strong>开始时间：</strong>${startDate}</p>
+                        <p><strong>使用时长：</strong>${duration}天</p>
+                        <p><strong>每日费用：</strong>¥${selectedDevice?.price || '0'}/天</p>
+                        <p><strong>总费用：</strong>¥${(selectedDevice?.price || 0) * duration}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // 设备详情
+        function showDeviceDetail(deviceId) {
+            const device = devicesData.find(d => d.id === deviceId);
+            if(device) {
+                alert(`${device.name}\n\n${device.description}\n\n功能特点：\n${device.specs.join('\n')}\n\n价格：${device.price}`);
+            }
+        }
+        
+        // 预约设备
+        function reserveDevice(deviceName) {
+            // 切换到预约标签
+            document.querySelector('.service-tab[data-tab="reservation"]').click();
+            
+            // 选择对应设备
+            setTimeout(() => {
+                const deviceOption = document.querySelector(`.device-option[data-device="${deviceName}"]`);
+                if(deviceOption) {
+                    document.querySelectorAll('.device-option').forEach(opt => opt.classList.remove('selected'));
+                    deviceOption.classList.add('selected');
+                    
+                    selectedDevice = {
+                        name: deviceOption.getAttribute('data-device'),
+                        price: deviceOption.getAttribute('data-price')
+                    };
+                    
+                    showNotification(`已选择设备：${deviceName}`, 'success');
+                }
+            }, 300);
+        }
+        
+        // 发送聊天消息
+        function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const chatMessages = document.getElementById('chatMessages');
+            
+            if(!chatInput || !chatMessages || !chatInput.value.trim()) return;
+            
+            const userMessage = chatInput.value.trim();
+            
+            // 添加用户消息
+            chatMessages.innerHTML += `
+                <div class="message user">
+                    <div class="message-content">${userMessage}</div>
+                </div>
+            `;
+            
+            // 清空输入框
+            chatInput.value = '';
+            
+            // 滚动到底部
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // 模拟机器人回复
+            setTimeout(() => {
+                const responses = [
+                    "好的，我了解了。请问还有其他问题吗？",
+                    "感谢您的咨询，我们的客服人员会尽快联系您。",
+                    "关于这个问题，您可以查看我们的使用说明或联系技术人员。",
+                    "设备的具体参数和租赁流程可以在设备介绍页面查看。"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                chatMessages.innerHTML += `
+                    <div class="message bot">
+                        <div class="message-content">${randomResponse}</div>
+                    </div>
+                `;
+                
+                // 滚动到底部
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+        
+        // 设置登录功能
+        function setupLoginFunctions() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const loginModal = document.getElementById('loginModal');
+            const closeModal = document.querySelector('.close-modal');
+            const loginForm = document.getElementById('loginForm');
+            
+            if(loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    loginModal.style.display = 'flex';
+                });
+            }
+            
+            if(registerBtn) {
+                registerBtn.addEventListener('click', () => {
+                    showNotification('请先登录后再注册', 'info');
+                    loginModal.style.display = 'flex';
+                });
+            }
+            
+            if(closeModal) {
+                closeModal.addEventListener('click', () => {
+                    loginModal.style.display = 'none';
+                });
+            }
+            
+            if(loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    
+                    if(email && password) {
+                        currentUser = {
+                            name: email.split('@')[0],
+                            email: email
+                        };
+                        
+                        loginModal.style.display = 'none';
+                        showNotification('登录成功！', 'success');
+                        
+                        // 更新UI
+                        updateUserUI();
+                    }
+                });
+            }
+            
+            // 模态框外部点击关闭
+            window.addEventListener('click', (e) => {
+                if(e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+        }
+        
+        // 更新用户界面
+        function updateUserUI() {
+            const authButtons = document.querySelector('.auth-buttons');
+            
+            if(currentUser) {
+                authButtons.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div style="width:40px; height:40px; background:linear-gradient(135deg, #4CAF50, #2A6FDB); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">
+                            ${currentUser.name.charAt(0).toUpperCase()}
+                        </div>
+                        <span style="font-weight:500;">${currentUser.name}</span>
+                        <button class="btn btn-outline" id="logoutBtn" style="padding:8px 15px;">
+                            <i class="fas fa-sign-out-alt"></i> 退出
+                        </button>
+                    </div>
+                `;
+                
+                // 添加退出登录事件
+                const logoutBtn = document.getElementById('logoutBtn');
+                if(logoutBtn) {
+                    logoutBtn.addEventListener('click', () => {
+                        currentUser = null;
+                        updateUserUI();
+                        showNotification('已退出登录', 'info');
+                    });
+                }
+            }
+        }
+        
+        // 显示通知
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            if(!notification) return;
+            
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

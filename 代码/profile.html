@@ -1,0 +1,1053 @@
+html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 链享银龄共享平台（苏州）</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary-color: #2A6FDB;
+            --secondary-color: #4CAF50;
+            --accent-color: #FF6B35;
+            --light-blue: #E8F4FF;
+            --light-green: #F0F9F0;
+            --light-orange: #FFF5F0;
+            --text-dark: #333333;
+            --text-medium: #666666;
+            --text-light: #999999;
+            --border-color: #E0E0E0;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --radius: 12px;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, var(--primary-color), #4A90E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .location-tag {
+            background: #F0F7FF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--primary-color);
+            margin-left: 10px;
+            font-weight: 500;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(42, 111, 219, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #1E5FC4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(42, 111, 219, 0.3);
+        }
+
+        /* 个人中心页面 */
+        .profile-page {
+            padding: 40px 0;
+            min-height: calc(100vh - 200px);
+        }
+
+        .profile-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: var(--text-medium);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .profile-sidebar {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 30px;
+        }
+
+        .user-info-card {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), #4A90E2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+
+        .user-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .user-type {
+            color: var(--text-medium);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .user-id {
+            color: var(--text-light);
+            font-size: 12px;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .profile-main {
+            padding: 20px;
+        }
+
+        .profile-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .profile-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-medium);
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* 订单管理 */
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .orders-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .orders-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-pending { background: #FFF3CD; color: #856404; }
+        .status-confirmed { background: #D4EDDA; color: #155724; }
+        .status-delivered { background: #D1ECF1; color: #0C5460; }
+        .status-completed { background: #D4EDDA; color: #155724; }
+        .status-cancelled { background: #F8D7DA; color: #721C24; }
+
+        /* 底部 */
+        footer {
+            background-color: #2C3E50;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #BDC3C7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #34495E;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495E;
+            color: #BDC3C7;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .profile-container {
+                padding: 20px;
+            }
+            
+            .orders-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-link"></i>
+                    <span>链享银龄共享平台</span>
+                    <span class="location-tag">苏州</span>
+                </a>
+                
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> 首页</a></li>
+                        <li><a href="services.html"><i class="fas fa-concierge-bell"></i> 服务</a></li>
+                        <li><a href="profile.html" class="active"><i class="fas fa-user-circle"></i> 个人中心</a></li>
+                        <li><a href="#contact"><i class="fas fa-phone-alt"></i> 联系</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="auth-buttons" id="authButtons">
+                    <!-- 这里的内容将通过JavaScript动态生成 -->
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 个人中心页面 -->
+    <section class="profile-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">个人中心</h1>
+                <p class="page-subtitle">管理您的账户信息、订单记录和设备信息</p>
+            </div>
+            
+            <div class="profile-container">
+                <div class="profile-content">
+                    <!-- 侧边栏 -->
+                    <div class="profile-sidebar">
+                        <div class="user-info-card">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h2 class="user-name" id="userName">用户名称</h2>
+                            <p class="user-type" id="userType">普通用户</p>
+                            <p class="user-id" id="userId">ID: SL202400001</p>
+                        </div>
+                        
+                        <nav class="sidebar-nav">
+                            <ul>
+                                <li><a href="#profile" class="active" data-section="profile"><i class="fas fa-user"></i> 个人信息</a></li>
+                                <li><a href="#orders" data-section="orders"><i class="fas fa-list-alt"></i> 我的订单</a></li>
+                                <li><a href="#devices" data-section="devices"><i class="fas fa-robot"></i> 我的设备</a></li>
+                                <li><a href="#messages" data-section="messages"><i class="fas fa-envelope"></i> 消息中心</a></li>
+                                <li><a href="#settings" data-section="settings"><i class="fas fa-cog"></i> 账户设置</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    
+                    <!-- 主内容区 -->
+                    <div class="profile-main">
+                        <!-- 个人信息 -->
+                        <div class="profile-section active" id="profileSection">
+                            <h2 class="section-title"><i class="fas fa-user"></i> 个人信息</h2>
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h3><i class="fas fa-id-card"></i> 基本信息</h3>
+                                    <div class="info-item">
+                                        <span class="info-label">用户名：</span>
+                                        <span class="info-value" id="profileUsername">张三</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">手机号：</span>
+                                        <span class="info-value" id="profilePhone">13800138000</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">邮箱：</span>
+                                        <span class="info-value" id="profileEmail">zhangsan@example.com</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">注册时间：</span>
+                                        <span class="info-value" id="profileRegisterTime">2024-01-15</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h3><i class="fas fa-building"></i> 机构信息</h3>
+                                    <div class="info-item">
+                                        <span class="info-label">机构名称：</span>
+                                        <span class="info-value" id="profileOrgName">怡养护理院</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">机构地址：</span>
+                                        <span class="info-value" id="profileOrgAddress">江苏省苏州市工业园区</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">联系人：</span>
+                                        <span class="info-value" id="profileContact">李四</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">联系电话：</span>
+                                        <span class="info-value" id="profileOrgPhone">0512-12345678</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card">
+                                <h3><i class="fas fa-chart-line"></i> 使用统计</h3>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">累计租用设备：</span>
+                                        <span class="info-value">15台</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">累计租用天数：</span>
+                                        <span class="info-value">180天</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">累计消费金额：</span>
+                                        <span class="info-value">¥28,500</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">当前租用设备：</span>
+                                        <span class="info-value">3台</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 我的订单 -->
+                        <div class="profile-section" id="ordersSection">
+                            <h2 class="section-title"><i class="fas fa-list-alt"></i> 我的订单</h2>
+                            <div style="margin-bottom:20px;">
+                                <button class="btn btn-outline btn-small" id="allOrders">全部订单</button>
+                                <button class="btn btn-outline btn-small" id="pendingOrders">待处理</button>
+                                <button class="btn btn-outline btn-small" id="activeOrders">使用中</button>
+                                <button class="btn btn-outline btn-small" id="completedOrders">已完成</button>
+                            </div>
+                            
+                            <table class="orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>订单号</th>
+                                        <th>设备名称</th>
+                                        <th>租赁时间</th>
+                                        <th>金额</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordersTableBody">
+                                    <!-- 订单数据将通过JavaScript动态生成 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- 我的设备 -->
+                        <div class="profile-section" id="devicesSection">
+                            <h2 class="section-title"><i class="fas fa-robot"></i> 我的设备</h2>
+                            <div class="info-grid" id="myDevicesGrid">
+                                <!-- 设备卡片将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 消息中心 -->
+                        <div class="profile-section" id="messagesSection">
+                            <h2 class="section-title"><i class="fas fa-envelope"></i> 消息中心</h2>
+                            <div id="messagesList">
+                                <!-- 消息将通过JavaScript动态生成 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 账户设置 -->
+                        <div class="profile-section" id="settingsSection">
+                            <h2 class="section-title"><i class="fas fa-cog"></i> 账户设置</h2>
+                            <div class="info-card">
+                                <h3><i class="fas fa-lock"></i> 安全设置</h3>
+                                <div style="margin:20px 0;">
+                                    <button class="btn btn-outline" id="changePasswordBtn">修改密码</button>
+                                    <button class="btn btn-outline" id="changePhoneBtn">更换手机号</button>
+                                    <button class="btn btn-outline" id="changeEmailBtn">更换邮箱</button>
+                                </div>
+                            </div>
+                            
+                            <div class="info-card">
+                                <h3><i class="fas fa-bell"></i> 通知设置</h3>
+                                <div style="margin:20px 0;">
+                                    <label style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                        <input type="checkbox" checked> 订单状态通知
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                        <input type="checkbox" checked> 设备维护提醒
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                                        <input type="checkbox"> 营销活动通知
+                                    </label>
+                                    <label style="display:flex; align-items:center; gap:10px;">
+                                        <input type="checkbox" checked> 系统公告
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> 链享银龄共享平台</h4>
+                    <p>苏州智能养老设备共享服务平台<br>让老年人共享改革发展成果</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="services.html">服务</a></li>
+                        <li><a href="profile.html">个人中心</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 400-123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contact@silverlink.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 江苏省苏州市工业园区</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>订阅更新</h4>
+                    <p>订阅我们的新闻通讯，获取最新养老科技资讯</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="请输入邮箱" style="padding:10px; border-radius:5px; border:1px solid #34495E; width:100%; margin-top:10px; background:#34495E; color:white;">
+                        <button class="btn btn-primary" style="width:100%; margin-top:10px;">订阅</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 链享银龄共享平台. 江苏省苏州市. 基于协同治理理论与资源配置理论构建.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 用户数据
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || {
+            name: "张三",
+            email: "zhangsan@example.com",
+            type: "organization",
+            phone: "13800138000",
+            orgName: "怡养护理院",
+            orgAddress: "江苏省苏州市工业园区",
+            registerTime: "2024-01-15"
+        };
+        
+        // 订单数据
+        const ordersData = [
+            {
+                id: "ORD20240320001",
+                device: "智能护理床",
+                startDate: "2024-03-20",
+                endDate: "2024-04-20",
+                amount: "¥6,000",
+                status: "使用中",
+                statusClass: "status-confirmed"
+            },
+            {
+                id: "ORD20240315002",
+                device: "智能床垫",
+                startDate: "2024-03-15",
+                endDate: "2024-04-15",
+                amount: "¥4,500",
+                status: "使用中",
+                statusClass: "status-confirmed"
+            },
+            {
+                id: "ORD20240228003",
+                device: "喂食机器人",
+                startDate: "2024-02-28",
+                endDate: "2024-03-28",
+                amount: "¥5,400",
+                status: "已完成",
+                statusClass: "status-completed"
+            },
+            {
+                id: "ORD20240215004",
+                device: "康复训练机器人",
+                startDate: "2024-02-15",
+                endDate: "2024-03-15",
+                amount: "¥7,500",
+                status: "已完成",
+                statusClass: "status-completed"
+            }
+        ];
+        
+        // 设备数据
+        const myDevicesData = [
+            {
+                name: "智能护理床",
+                deviceId: "SL-BED-202312345",
+                startDate: "2024-03-20",
+                endDate: "2024-04-20",
+                status: "租用中",
+                dailyPrice: "¥200",
+                totalPrice: "¥6,000"
+            },
+            {
+                name: "智能床垫",
+                deviceId: "SL-MAT-202312346",
+                startDate: "2024-03-15",
+                endDate: "2024-04-15",
+                status: "租用中",
+                dailyPrice: "¥150",
+                totalPrice: "¥4,500"
+            }
+        ];
+        
+        // DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化用户信息
+            initUserInfo();
+            
+            // 初始化订单表格
+            renderOrders('all');
+            
+            // 初始化我的设备
+            renderMyDevices();
+            
+            // 初始化消息中心
+            renderMessages();
+            
+            // 侧边栏导航
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            const sections = document.querySelectorAll('.profile-section');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    
+                    // 更新导航状态
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 显示对应部分
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if(section.id === sectionId + 'Section') {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // 订单筛选
+            document.getElementById('allOrders')?.addEventListener('click', () => renderOrders('all'));
+            document.getElementById('pendingOrders')?.addEventListener('click', () => renderOrders('pending'));
+            document.getElementById('activeOrders')?.addEventListener('click', () => renderOrders('active'));
+            document.getElementById('completedOrders')?.addEventListener('click', () => renderOrders('completed'));
+            
+            // 更新用户界面
+            updateUserUI();
+        });
+        
+        // 初始化用户信息
+        function initUserInfo() {
+            // 更新用户信息显示
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userType').textContent = currentUser.type === 'organization' ? '机构用户' : '个人用户';
+            document.getElementById('userId').textContent = `ID: SL${currentUser.registerTime.replace(/-/g, '').substring(2)}001`;
+            
+            document.getElementById('profileUsername').textContent = currentUser.name;
+            document.getElementById('profilePhone').textContent = currentUser.phone;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('profileRegisterTime').textContent = currentUser.registerTime;
+            
+            if(currentUser.type === 'organization') {
+                document.getElementById('profileOrgName').textContent = currentUser.orgName;
+                document.getElementById('profileOrgAddress').textContent = currentUser.orgAddress;
+                document.getElementById('profileContact').textContent = currentUser.name;
+                document.getElementById('profileOrgPhone').textContent = currentUser.phone;
+            }
+        }
+        
+        // 渲染订单
+        function renderOrders(filter) {
+            const tableBody = document.getElementById('ordersTableBody');
+            if(!tableBody) return;
+            
+            let filteredOrders = ordersData;
+            
+            if(filter === 'pending') {
+                filteredOrders = ordersData.filter(order => order.status === '待处理');
+            } else if(filter === 'active') {
+                filteredOrders = ordersData.filter(order => order.status === '使用中');
+            } else if(filter === 'completed') {
+                filteredOrders = ordersData.filter(order => order.status === '已完成');
+            }
+            
+            tableBody.innerHTML = filteredOrders.map(order => `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.device}</td>
+                    <td>${order.startDate} 至 ${order.endDate}</td>
+                    <td>${order.amount}</td>
+                    <td><span class="status-badge ${order.statusClass}">${order.status}</span></td>
+                    <td>
+                        <button class="btn btn-outline btn-small" onclick="viewOrderDetail('${order.id}')">查看</button>
+                        ${order.status === '使用中' ? 
+                            '<button class="btn btn-outline btn-small" onclick="extendOrder(\'' + order.id + '\')">续租</button>' : 
+                            ''
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        // 渲染我的设备
+        function renderMyDevices() {
+            const devicesGrid = document.getElementById('myDevicesGrid');
+            if(!devicesGrid) return;
+            
+            devicesGrid.innerHTML = myDevicesData.map(device => `
+                <div class="info-card">
+                    <h3><i class="fas fa-robot"></i> ${device.name}</h3>
+                    <div class="info-item">
+                        <span class="info-label">设备编号：</span>
+                        <span class="info-value">${device.deviceId}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">租用时间：</span>
+                        <span class="info-value">${device.startDate} 至 ${device.endDate}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">设备状态：</span>
+                        <span class="info-value" style="color: #28a745;">${device.status}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">日租金：</span>
+                        <span class="info-value">${device.dailyPrice}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">总费用：</span>
+                        <span class="info-value">${device.totalPrice}</span>
+                    </div>
+                    <div style="margin-top:20px; display:flex; gap:10px;">
+                        <button class="btn btn-outline btn-small" onclick="viewDeviceDetail('${device.deviceId}')">设备详情</button>
+                        <button class="btn btn-primary btn-small" onclick="extendDevice('${device.deviceId}')">申请续租</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 渲染消息
+        function renderMessages() {
+            const messagesList = document.getElementById('messagesList');
+            if(!messagesList) return;
+            
+            const messages = [
+                {
+                    id: 1,
+                    title: "订单确认通知",
+                    content: "您的订单 ORD20240320001 已确认，设备已安排配送。",
+                    time: "2024-03-20 10:30",
+                    read: false
+                },
+                {
+                    id: 2,
+                    title: "设备维护提醒",
+                    content: "您租用的智能护理床（编号：SL-BED-202312345）将于3月25日进行定期维护。",
+                    time: "2024-03-18 15:20",
+                    read: true
+                },
+                {
+                    id: 3,
+                    title: "系统更新通知",
+                    content: "链享银龄平台将于3月22日凌晨2:00-4:00进行系统维护，期间服务可能短暂中断。",
+                    time: "2024-03-17 09:15",
+                    read: true
+                }
+            ];
+            
+            messagesList.innerHTML = messages.map(msg => `
+                <div class="info-card" style="margin-bottom:15px; ${!msg.read ? 'border-left:4px solid var(--primary-color);' : ''}">
+                    <div style="display:flex; justify-content:space-between; align-items:start;">
+                        <div>
+                            <h4 style="margin-bottom:5px;">${msg.title}</h4>
+                            <p style="color:var(--text-medium); margin-bottom:10px;">${msg.content}</p>
+                            <small style="color:var(--text-light);">${msg.time}</small>
+                        </div>
+                        ${!msg.read ? '<span style="background:#FF6B6B; color:white; padding:2px 8px; border-radius:10px; font-size:12px;">未读</span>' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // 查看订单详情
+        function viewOrderDetail(orderId) {
+            alert(`查看订单详情：${orderId}\n\n订单详情功能正在开发中...`);
+        }
+        
+        // 续租订单
+        function extendOrder(orderId) {
+            if(confirm(`确认要续租订单 ${orderId} 吗？`)) {
+                alert(`已提交续租申请，客服人员将很快与您联系确认续租事宜。`);
+            }
+        }
+        
+        // 查看设备详情
+        function viewDeviceDetail(deviceId) {
+            alert(`查看设备详情：${deviceId}\n\n设备详情功能正在开发中...`);
+        }
+        
+        // 续租设备
+        function extendDevice(deviceId) {
+            if(confirm(`确认要续租设备 ${deviceId} 吗？`)) {
+                alert(`已提交续租申请，请等待客服确认。`);
+            }
+        }
+        
+        // 更新用户界面
+        function updateUserUI() {
+            const authButtons = document.getElementById('authButtons');
+            
+            if(currentUser) {
+                // 显示用户信息
+                authButtons.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <div style="width:40px; height:40px; background:linear-gradient(135deg, #4CAF50, #2A6FDB); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">
+                            ${currentUser.name.charAt(0).toUpperCase()}
+                        </div>
+                        <span style="font-weight:500;">${currentUser.name}</span>
+                        <button class="btn btn-outline" id="logoutBtn" style="padding:8px 15px;">
+                            <i class="fas fa-sign-out-alt"></i> 退出
+                        </button>
+                    </div>
+                `;
+                
+                // 添加退出登录事件
+                const logoutBtn = document.getElementById('logoutBtn');
+                if(logoutBtn) {
+                    logoutBtn.addEventListener('click', () => {
+                        localStorage.removeItem('currentUser');
+                        currentUser = null;
+                        updateUserUI();
+                        alert('已退出登录');
+                        window.location.href = 'index.html';
+                    });
+                }
+            } else {
+                // 显示登录注册按钮
+                authButtons.innerHTML = `
+                    <button class="btn btn-outline" onclick="window.location.href='index.html#login'">
+                        <i class="fas fa-sign-in-alt"></i> 登录
+                    </button>
+                    <button class="btn btn-primary" onclick="window.location.href='index.html#register'">
+                        <i class="fas fa-user-plus"></i> 注册
+                    </button>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
+
